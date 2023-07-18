@@ -28,34 +28,34 @@ class ECommerceScreen extends StatelessWidget {
 
   Container _buildProductTile() {
     return Container(
-              height: 200,
-              color: Colors.white,
-              child: Row(
-                children: <Widget>[
-                  Image.asset(
-                    'assets/textiles.jpg',
-                    fit: BoxFit.fitHeight,
+      height: 200,
+      color: Colors.white,
+      child: Row(
+        children: <Widget>[
+          Image.asset(
+            'assets/textiles.jpg',
+            fit: BoxFit.fitHeight,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const <Widget>[
+                  Text(
+                    'Lorem Ipsum',
+                    //  style: Theme.of(context).textTheme.title,
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const <Widget>[
-                          Text(
-                            'Lorem Ipsum',
-                            //  style: Theme.of(context).textTheme.title,
-                          ),
-                          Text(
-                              'Dolor sit amet, consectetur adipiscing elit. Quisque faucibus.')
-                        ],
-                      ),
-                    ),
-                  )
+                  Text(
+                      'Dolor sit amet, consectetur adipiscing elit. Quisque faucibus.')
                 ],
               ),
-            );
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Row _buildToggleBar() {
@@ -165,13 +165,12 @@ class DealButton extends StatelessWidget {
       child: Container(
         height: 80,
         decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(20)),
-        child:  Padding(
+            color: color, borderRadius: BorderRadius.circular(20)),
+        child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Center(
             child: Text(
-             text,
+              text,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.white,
