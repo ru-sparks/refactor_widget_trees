@@ -8,17 +8,31 @@ class ECommerceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.purple,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.green,
+        appBarTheme: AppBarTheme(
+          elevation: 10,
+          titleTextStyle: const TextTheme(
+            titleLarge: TextStyle(
+              fontFamily: 'LeckerliOne',
+              fontSize: 20,
+            ),
+          ).titleLarge,
+        ),
+      ),
+
+
+    home: Scaffold(
         appBar: _buildAppBar(),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
-              _buildToggleBar(),
+              _buildToggleBar(context),
               Image.asset('assets/woman_shopping.jpg'),
               const DealButtons(),
-              _buildProductTile(),
+              _buildProductTile(context),
             ],
           ),
         ),
@@ -26,10 +40,10 @@ class ECommerceScreen extends StatelessWidget {
     );
   }
 
-  Container _buildProductTile() {
+  Container _buildProductTile(BuildContext context) {
     return Container(
       height: 200,
-      color: Colors.white,
+      color: Theme.of(context).cardColor,
       child: Row(
         children: <Widget>[
           Image.asset(
@@ -58,49 +72,40 @@ class ECommerceScreen extends StatelessWidget {
     );
   }
 
-  Row _buildToggleBar() {
+  Row _buildToggleBar(BuildContext context) {
     return Row(
-      children: const <Widget>[
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Recommended',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Formal Wear',
-            style: TextStyle(
-              color: Colors.white54,
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text(
-            'Casual Wear',
-            style: TextStyle(
-              color: Colors.white54,
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+      children: <Widget>[
+        _buildToggleItem(context, 'Recommended', selected: true),
+        _buildToggleItem(context, 'Formal Wear'),
+        _buildToggleItem(context, 'Casual Wear'),
       ],
+    );
+  }
+
+  Padding _buildToggleItem(BuildContext context, String text,
+      {bool selected = false}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 17,
+          color: selected
+              ? null
+              : Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.color
+                  ?.withOpacity(0.5),
+          fontWeight: selected ? FontWeight.bold : null,
+        ),
+      ),
     );
   }
 
   AppBar _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.purpleAccent,
+      centerTitle: true,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
       leading: const Padding(
@@ -173,9 +178,8 @@ class DealButton extends StatelessWidget {
               text,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                color: Colors.white,
                 fontSize: 20.0,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ),
